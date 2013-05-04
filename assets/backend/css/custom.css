@@ -1,0 +1,67 @@
+/* BACKGROUND COLOR
+------------------------------------------------------------------------- ***/
+.bg-white	 		{ background-color: white !important; }
+.bg-white25			{ background-color: rgba(255, 255, 255, .25); }
+.bg-white50			{ background-color: rgba(255, 255, 255, .50); }
+.bg-white75			{ background-color: rgba(255, 255, 255, .75); }
+
+.bg-gray-light 		{ background-color: #EDEFF2 !important; }
+.bg-gray-medium 	{ background-color: #e2e4e8 !important; }
+.bg-gray-strong 	{ background-color: #dadce1 !important; }
+
+.bg-yellow-light 	{ background-color: #FEFBEA !important; }
+.bg-yellow-medium 	{ background-color: #FDF7D5 !important; }
+.bg-yellow-strong 	{ background-color: #FDF3BF !important; }
+
+.bg-blue-light 		{ background-color: #E9F3FD !important; }
+.bg-blue-medium 	{ background-color: #D4E6F9 !important; }
+.bg-blue-strong 	{ background-color: #BFD9F4 !important; }
+
+.bg-green-light 	{ background-color: #E6F6E5 !important; }
+.bg-green-medium 	{ background-color: #D1EED0 !important; }
+.bg-green-strong 	{ background-color: #BCE5BB !important; }
+
+/* HR coloring */
+.bg-gray-light hr 	 { border-top-color: #d9dadc; }
+.bg-gray-medium hr 	 { border-top-color: #cbced2; border-bottom-color: #f3f4f4; }
+.bg-gray-strong hr 	 { border-top-color: #c2c3c7; border-bottom-color: #eeefef; }
+.bg-yellow-light hr  { border-top-color: #f0eaca; border-bottom-color: #ffffff; }
+.bg-yellow-medium hr { border-top-color: #ede19a; border-bottom-color: #ffffff; }
+.bg-yellow-strong hr { border-top-color: #ecd978; border-bottom-color: #ffffff; }
+.bg-blue-light hr 	 { border-top-color: #ccd9e3; }
+.bg-blue-medium hr 	 { border-top-color: #c2d3e0; border-bottom-color: #f3f8fd; }
+.bg-blue-strong hr 	 { border-top-color: #b1c5d8; border-bottom-color: #eef4fb; }
+.bg-green-light hr	 { border-top-color: #c7ddc4; }
+.bg-green-medium hr	 { border-top-color: #bfd7bc; border-bottom-color: #f2fbee; }
+.bg-green-strong hr	 { border-top-color: #adc9ad; border-bottom-color: #e9f5e4; }
+
+/*Top bar select */ 
+#top_select {
+  height: 28px;
+  margin: 6px 9px;
+}
+#top_text {
+  height: 28px;
+  margin: 6px 0px;
+}
+
+label.valid {
+	width: 24px;
+	height: 24px;
+	display: block;
+	text-indent: -9999px;
+}
+label.error {
+
+	color: red;
+	padding: 2px 8px;
+	margin-top: 2px;
+	display: block;
+}
+#overlay {
+  background-color: black;
+  position: fixed;
+  top: 0; right: 0; bottom: 0; left: 0;
+  opacity: 0.2; /* also -moz-opacity, etc. */
+  z-index: 10;
+}
