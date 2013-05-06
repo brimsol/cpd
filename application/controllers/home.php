@@ -14,16 +14,12 @@ class Home extends CI_Controller {
 	public function __construct() {
 		parent::__construct();
 		//$this -> load -> library('session');
-		$this -> load -> model('backend/collections_model');
-		$this -> load -> model('backend/pages_model');
-		$this -> load -> model('backend/slider_model');
+		
 	}
 
 	public function index() {
 
-		$data['slider'] = $this -> slider_model -> GetHomeSlider();
-		$data['collections'] = $this -> collections_model -> GetAllHome();
-		$this -> load -> view('home_view', $data);
+		$this -> load -> view('home_view');
 
 	}
 

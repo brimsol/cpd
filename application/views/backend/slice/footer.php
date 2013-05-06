@@ -17,7 +17,7 @@
 		<script src="<?php echo base_url(); ?>assets/backend/js/jquery.validate.js"></script>
 		<script src="<?php echo base_url(); ?>assets/backend/js/custom.js"></script>
 		<script src="<?php echo base_url(); ?>assets/backend/js/ajax.js"></script>
-		<script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
+		<!-- <script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>-->
 		
 		<script>
 			$(document).ready(function() {

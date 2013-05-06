@@ -14,7 +14,7 @@
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
-			<a class="brand" href="<?php echo site_url(); ?>">Glenna Jean</a>
+			<a class="brand" href="<?php echo site_url(); ?>">Central Park Deli</a>
 			<div class="nav-collapse">
 <?php if($this -> session -> userdata('username') != '' ){ ?>
 				<ul class="nav">
@@ -24,27 +24,8 @@
 					</li>
 					
 				</ul>
+<?php } ?>				
 				<div class="pull-right"	>
-					<ul class="nav">
-						<li class="divider-vertical">
-							<form action="<?php echo site_url('backend/search/index');?>" method="post">
-								<select class="input-medium" id="top_select" name="cat">
-									<option <?php if(isset($cat) && $cat =='collection'){echo 'selected="TRUE"';}?> value="collection">Collection</option>
-									<option <?php if(isset($cat) && $cat =='products'){echo 'selected="TRUE"';}?> value="products">Product</option>
-									<option <?php if(isset($cat) && $cat =='swatches'){echo 'selected="TRUE"';}?> value="swatches">Swatches</option>
-									<option <?php if(isset($cat) && $cat =='stores'){echo 'selected="TRUE"';}?> value="stores">Store</option>
-									<option <?php if(isset($cat) && $cat =='onlinestores'){echo 'selected="TRUE"';}?> value="onlinestores">Online Store</option>
-								</select>
-								<div class="input-append" id="top_text">
-									<input class="span2" name="key" placeholder="Search Term" value="<?php if(isset($key)){echo $key;}?>" id="appendedInputButton" type="text">
-									<button class="btn" type="submit">
-										Go!
-									</button>
-								</div>
-							</form>
-						</li>
-<?php } ?>
-					</ul>
 					<ul class="nav">
 						<li id="fat-menu" class="dropdown">
 							<?php $username = $this -> session -> userdata('username'); ?>

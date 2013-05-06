@@ -2,14 +2,14 @@
 if (!defined('BASEPATH'))
 	exit('No direct script access allowed');
 /**
- * Collections Class
+ * categories Class
  * @package Glenna Jean
  * @subpackage Backend
  * @category Controller
  * @author AMI
  * @link ami@bandyworks.com
  * */
-Class Collections extends CI_Controller {
+Class Categories extends CI_Controller {
 
 	public function __construct() {
 		parent::__construct();
@@ -17,19 +17,19 @@ Class Collections extends CI_Controller {
 			redirect('admin');
 		}
 
-		$this -> load -> model('backend/collections_model');
+		$this -> load -> model('backend/categories_model');
 	}
 
 	//List all collection on backend
 	public function index() {
-		$data['collections'] = $this -> collections_model -> get_all();
-		$this -> load -> view('backend/collections/list_view', $data);
+		$data['categories'] = $this -> categories_model -> get_all();
+		$this -> load -> view('backend/categories/list_view', $data);
 	}
 
 	//i have tried a grid view,but little complex on design
 	public function grid_view() {
-		$data['collections'] = $this -> collections_model -> get_all();
-		$this -> load -> view('backend/collections/grid_view', $data);
+		$data['categories'] = $this -> categories_model -> get_all();
+		$this -> load -> view('backend/categories/grid_view', $data);
 	}
 
 	//add new collection->upload image->get encrypted name -> add everything to db
@@ -42,8 +42,8 @@ Class Collections extends CI_Controller {
 
 		if ($this -> form_validation -> run() == FALSE)// validation hasn't been passed
 		{
-			$data['collections'] = $this -> collections_model -> get_all_collection_names();
-			$this -> load -> view('backend/collections/add_view', $data);
+			$data['categories'] = $this -> categories_model -> get_all_collection_names();
+			$this -> load -> view('backend/categories/add_view', $data);
 		} else// passed validation proceed to post success logic
 		{
 			// build array for the model
@@ -56,7 +56,7 @@ Class Collections extends CI_Controller {
 			if ($this -> upload -> do_upload()) {
 				$data = $this -> upload -> data();
 				$form_data = array('name' => set_value('name'), 'description' => set_value('description'), 'image' => $data['file_name'], 'category' => set_value('category'), 'new' => set_value('new'), 'store' => $this -> input -> post('store'), 'similar' => serialize($this -> input -> post('similar')));
-				if ($this -> collections_model -> SaveCollection($form_data) == TRUE)// the information has therefore been successfully saved in the db
+				if ($this -> categories_model -> SaveCollection($form_data) == TRUE)// the information has therefore been successfully saved in the db
 				{
 					$this -> ci_alerts -> set('success', 'Saved Successfully');
 					redirect('admin/collection/add');
@@ -69,8 +69,8 @@ Class Collections extends CI_Controller {
 			} else {
 				//Failed to upload file.
 				$data['upload_error'] = $this -> upload -> display_errors();
-				$data['collections'] = $this -> collections_model -> get_all_collection_names();
-				$this -> load -> view('backend/collections/add_view', $data);
+				$data['categories'] = $this -> categories_model -> get_all_collection_names();
+				$this -> load -> view('backend/categories/add_view', $data);
 			}
 
 		}
@@ -85,9 +85,9 @@ Class Collections extends CI_Controller {
 
 		if ($this -> form_validation -> run() == FALSE)// validation hasn't been passed
 		{
-			$data['collections'] = $this -> collections_model -> GetOne($id);
-			$data['collections_list'] = $this -> collections_model -> get_all_collection_names();
-			$this -> load -> view('backend/collections/edit_view', $data);
+			$data['categories'] = $this -> categories_model -> GetOne($id);
+			$data['categories_list'] = $this -> categories_model -> get_all_collection_names();
+			$this -> load -> view('backend/categories/edit_view', $data);
 		} else// passed validation proceed to post success logic
 		{
 			// build array for the model
@@ -110,7 +110,7 @@ Class Collections extends CI_Controller {
 				if ($this -> upload -> do_upload()) {
 					$data = $this -> upload -> data();
 					$form_data = array('name' => set_value('name'), 'description' => set_value('description'), 'image' => $data['file_name'], 'category' => set_value('category'), 'new' => $this -> input -> post('new'), 'store' => $this -> input -> post('store'), 'similar' => serialize($this -> input -> post('similar')));
-					if ($this -> collections_model -> UpdateCollection($id, $form_data) == TRUE)// the information has therefore been successfully saved in the db
+					if ($this -> categories_model -> UpdateCollection($id, $form_data) == TRUE)// the information has therefore been successfully saved in the db
 					{
 						$this -> ci_alerts -> set('success', 'Saved Successfully');
 						redirect('admin/collection/edit/' . $id);
@@ -123,16 +123,16 @@ Class Collections extends CI_Controller {
 				} else {
 					//Failed to upload file.
 					$data['upload_error'] = $this -> upload -> display_errors();
-					$data['collections'] = $this -> collections_model -> get_all_collection_names();
-					$data['collections'] = $this -> collections_model -> GetOne($id);
-					//$data['collections'] = $this -> collections_model -> get_all_collection_names();
-					$this -> load -> view('backend/collections/edit_view', $data);
+					$data['categories'] = $this -> categories_model -> get_all_collection_names();
+					$data['categories'] = $this -> categories_model -> GetOne($id);
+					//$data['categories'] = $this -> categories_model -> get_all_collection_names();
+					$this -> load -> view('backend/categories/edit_view', $data);
 				}
 			} else {
 
 				$form_data = array('name' => set_value('name'), 'description' => set_value('description'), 'category' => set_value('category'), 'new' => $this -> input -> post('new'), 'store' => $this -> input -> post('store'), 'similar' => serialize($this -> input -> post('similar')));
 
-				if ($this -> collections_model -> UpdateCollection($id, $form_data) == TRUE)// the information has therefore been successfully saved in the db
+				if ($this -> categories_model -> UpdateCollection($id, $form_data) == TRUE)// the information has therefore been successfully saved in the db
 				{
 					$this -> ci_alerts -> set('success', 'Saved Successfully');
 					redirect('admin/collection/edit/' . $id);
@@ -150,8 +150,8 @@ Class Collections extends CI_Controller {
 	public function filter() {
 
 		$filter = $this -> input -> post('filter');
-		$data['collections'] = $this -> collections_model -> GetAll($filter);
-		$this -> load -> view('backend/collections/list_ajax_view', $data);
+		$data['categories'] = $this -> categories_model -> GetAll($filter);
+		$this -> load -> view('backend/categories/list_ajax_view', $data);
 
 	}
 
@@ -161,10 +161,10 @@ Class Collections extends CI_Controller {
 
 		if ($id == '' || $id == null) {
 
-			redirect('admin/collections/');
+			redirect('admin/categories/');
 
 		} elseif ($filename != null) {
-			$this -> db -> delete('collections', array('id' => $id));
+			$this -> db -> delete('categories', array('id' => $id));
 			$tables = array('products', 'swatches');
 			$this -> db -> where('category', $id);
 			$this -> db -> delete($tables);
@@ -174,17 +174,17 @@ Class Collections extends CI_Controller {
 				if (unlink($full_path)) {
 
 					$this -> ci_alerts -> set('success', 'Collection deleted successfully');
-					redirect('admin/collections/');
+					redirect('admin/categories/');
 
 				} else {
 
 					$this -> ci_alerts -> set('success', 'Collection delected from database,but image files are not removed');
-					redirect('admin/collections/');
+					redirect('admin/categories/');
 				}
 			} else {
 
 				$this -> ci_alerts -> set('success', 'Collection deleted successfully');
-				redirect('admin/collections/');
+				redirect('admin/categories/');
 			}
 		}
 
@@ -192,4 +192,4 @@ Class Collections extends CI_Controller {
 
 }
 
-/* End of file collections.php */
+/* End of file categories.php */
