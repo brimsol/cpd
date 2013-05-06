@@ -34,7 +34,7 @@ Class Categories extends CI_Controller {
 
 		if ($this -> form_validation -> run() == FALSE)// validation hasn't been passed
 		{
-			$this -> load -> view('backend/categories/add_view', $data);
+			$this -> load -> view('backend/categories/add_view');
 
 		} else// passed validation proceed to post success logic
 		{
