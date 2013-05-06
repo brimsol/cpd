@@ -76,9 +76,9 @@ $route['admin/swatche/add'] = "backend/swatches/add";
 /*Edit Swatche*/
 $route['admin/swatche/edit/(:num)'] = "backend/swatches/edit/$1";
 /*Add New Collection*/
-$route['admin/collection/add'] = "backend/collections/add";
+$route['admin/categories/add'] = "backend/categories/add";
 /*Edit Collection*/
-$route['admin/collection/edit/(:num)'] = "backend/collections/edit/$1";
+$route['admin/categories/edit/(:num)'] = "backend/categories/edit/$1";
 /*Add New Store*/
 $route['admin/store/add'] = "backend/stores/add";
 /*Edit Store*/

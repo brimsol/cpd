@@ -26,53 +26,29 @@ Class Categories extends CI_Controller {
 		$this -> load -> view('backend/categories/list_view', $data);
 	}
 
-	//i have tried a grid view,but little complex on design
-	public function grid_view() {
-		$data['categories'] = $this -> categories_model -> get_all();
-		$this -> load -> view('backend/categories/grid_view', $data);
-	}
-
-	//add new collection->upload image->get encrypted name -> add everything to db
+	//add new categories,get from view add to db
 
 	function add() {
 		$this -> form_validation -> set_rules('name', 'Collection Name', 'required|trim|xss_clean|max_length[200]');
 		$this -> form_validation -> set_rules('description', 'Description', 'required|trim|xss_clean|max_length[2000]');
-		$this -> form_validation -> set_rules('category', 'category', 'required|trim|xss_clean');
-		$this -> form_validation -> set_rules('new', 'New', 'trim|xss_clean');
 
 		if ($this -> form_validation -> run() == FALSE)// validation hasn't been passed
 		{
-			$data['categories'] = $this -> categories_model -> get_all_collection_names();
 			$this -> load -> view('backend/categories/add_view', $data);
+
 		} else// passed validation proceed to post success logic
 		{
-			// build array for the model
-			$config['upload_path'] = './uploads/';
-			$config['allowed_types'] = 'gif|jpg|png';
-			$config['max_size'] = '500';
-			$config['encrypt_name'] = TRUE;
-			$this -> load -> library('upload', $config);
-
-			if ($this -> upload -> do_upload()) {
-				$data = $this -> upload -> data();
-				$form_data = array('name' => set_value('name'), 'description' => set_value('description'), 'image' => $data['file_name'], 'category' => set_value('category'), 'new' => set_value('new'), 'store' => $this -> input -> post('store'), 'similar' => serialize($this -> input -> post('similar')));
-				if ($this -> categories_model -> SaveCollection($form_data) == TRUE)// the information has therefore been successfully saved in the db
-				{
-					$this -> ci_alerts -> set('success', 'Saved Successfully');
-					redirect('admin/collection/add');
-					// or whatever logic needs to occur
-				} else {
-					$this -> ci_alerts -> set('success', 'An error occurred saving your information. Please try again later');
-					redirect('admin/collection/add');
-
-				}
+			$form_data = array('name' => set_value('name'), 'description' => set_value('description'));
+			if ($this -> categories_model -> save($form_data) == TRUE)// the information has therefore been successfully saved in the db
+			{
+				$this -> ci_alerts -> set('success', 'Saved Successfully');
+				redirect('admin/categories/add');
+				// or whatever logic needs to occur
 			} else {
-				//Failed to upload file.
-				$data['upload_error'] = $this -> upload -> display_errors();
-				$data['categories'] = $this -> categories_model -> get_all_collection_names();
-				$this -> load -> view('backend/categories/add_view', $data);
-			}
+				$this -> ci_alerts -> set('success', 'An error occurred saving your data. Please try again later');
+				redirect('admin/categories/add');
 
+			}
 		}
 	}
 

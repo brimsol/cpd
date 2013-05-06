@@ -6,7 +6,7 @@
  * @author AMI 
  * @link ami@bandyworks.com 
  * */
-class Collections_model extends CI_Model {
+class Categories_model extends CI_Model {
 
 	function __construct() {
 		parent::__construct();
@@ -22,9 +22,8 @@ class Collections_model extends CI_Model {
 	 * @return Bool - TRUE or FALSE
 	 */
 
-	function SaveCollection($form_data) {
-		$this -> db -> insert('collections', $form_data);
-
+	function save($form_data) {
+		$this -> db -> insert('categories', $form_data);
 		if ($this -> db -> affected_rows() == '1') {
 			return TRUE;
 		}
