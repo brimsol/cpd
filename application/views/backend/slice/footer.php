@@ -3,7 +3,7 @@
 
 			<footer>
 				<p>
-					&copy; Glene Jean <?php echo date("Y"); ?>
+					&copy; Central Park Deli <?php echo date("Y"); ?>
 				</p>
 			</footer>
 </div>
