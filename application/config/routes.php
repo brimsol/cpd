@@ -52,21 +52,29 @@ $route['contact'] = "home/contact";
 /*Dashboard*/
 $route['dashboard'] = "backend/dashboard";
 /*Add New Products*/
-$route['admin/product/add'] = "backend/products/add";
+$route['admin/dishes/add'] = "backend/dishes/add";
 /*Products Pagination*/
-$route['admin/products/(:num)'] = "backend/products/index/$1";
+$route['admin/dishes/(:num)'] = "backend/dishes/index/$1";
+/*Add New Products*/
+$route['admin/special/add'] = "backend/special/add";
+/*Add New Products*/
+$route['admin/special/edit/(:num)'] = "backend/special/edit/$1";
+/*Products Pagination*/
+$route['admin/special/(:num)'] = "backend/special/index/$1";
 /*Store Pagination*/
 $route['admin/stores/(:num)'] = "backend/stores/index/$1";
 /*Swatches Pagination*/
 $route['admin/swatches/(:num)'] = "backend/swatches/index/$1";
 /*View Products @ backend*/
-$route['admin/product/view/(:num)'] = "backend/products/view/$1";
+$route['admin/dishes/view/(:num)'] = "backend/dishes/view/$1";
+/*View Products @ backend*/
+$route['admin/special/view/(:num)'] = "backend/special/view/$1";
 /*View Store @ backend*/
 $route['admin/store/view/(:num)'] = "backend/stores/view/$1";
 /*View Swatches @ backend*/
 $route['admin/swatche/view/(:num)'] = "backend/swatches/view/$1";
 /*Edit Products*/
-$route['admin/product/edit/(:num)'] = "backend/products/edit/$1";
+$route['admin/dishes/edit/(:num)'] = "backend/dishes/edit/$1";
 /*Products In a collection*/
 $route['admin/products/in_collection/(:num)'] = "backend/products/in_collection/$1";
 /*Swatches In a collection*/
@@ -104,12 +112,12 @@ $route['admin/page/edit/(:num)'] = "backend/pages/edit/$1";
 /*List All Pages*/
 $route['admin/pages'] = "backend/pages";
 $route['admin/page'] = "backend/pages";
-/*List All Collection*/
-$route['admin/collections'] = "backend/collections";
-$route['admin/collection'] = "backend/collections";
+/*List All Categories*/
+$route['admin/categories'] = "backend/categories";
 /*List All Products*/
-$route['admin/products'] = "backend/products";
-$route['admin/product'] = "backend/products";
+$route['admin/dishes'] = "backend/dishes";
+/*List All Products*/
+$route['admin/special'] = "backend/special";
 /*List All Swatches*/
 $route['admin/swatches'] = "backend/swatches";
 $route['admin/swatche'] = "backend/swatches";

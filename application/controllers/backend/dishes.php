@@ -9,7 +9,7 @@ if (!defined('BASEPATH'))
  * @author AMI
  * @link ami@bandyworks.com
  * */
-class Products extends CI_Controller {
+class Dishes extends CI_Controller {
 
 	public function __construct() {
 		parent::__construct();
@@ -17,48 +17,48 @@ class Products extends CI_Controller {
 			redirect('admin');
 		}
 		//$this -> load -> library('session');
-		$this -> load -> model('backend/collections_model');
-		$this -> load -> model('backend/products_model');
+		$this -> load -> model('backend/categories_model');
+		$this -> load -> model('backend/dishes_model');
 	}
 
 	public function index() {
 
 		$config = array();
-		$config["base_url"] = site_url('admin/products/');
-		$config["total_rows"] = $this -> db -> count_all('products');
+		$config["base_url"] = site_url('admin/dishes/');
+		$config["total_rows"] = $this -> db -> count_all('dishes');
 		$config["per_page"] = 20;
 		$config["uri_segment"] = 3;
 		$config['num_links'] = 9;
 		$this -> pagination -> initialize($config);
 		$page = ($this -> uri -> segment(3)) ? $this -> uri -> segment(3) : 0;
-		$data['products'] = $this -> products_model -> GetAll($config["per_page"], $page);
+		$data['dishes'] = $this -> dishes_model -> get_all($config["per_page"], $page);
 		$data['links'] = $this -> pagination -> create_links();
-		$data['collections'] = $this -> collections_model -> get_all_collection_names();
-		$this -> load -> view('backend/products/list_view', $data);
+		$data['categories'] = $this -> categories_model -> get_all();
+		$this -> load -> view('backend/dishes/list_view', $data);
 	}
 
 	public function view($id) {
 
-		$data['products'] = $this -> products_model -> GetOne($id);
-		$this -> load -> view('backend/products/detail_view', $data);
+		$data['dishes'] = $this -> products_model -> GetOne($id);
+		$this -> load -> view('backend/dishes/detail_view', $data);
 
 	}
 
-	public function in_collection($id) {
+	public function in_category($id) {
 
-		$data['products'] = $this -> products_model -> GetAllInACollection($id);
-		$this -> load -> view('backend/products/list_view', $data);
+		$data['dishes'] = $this -> dishes_model -> get_all_in_this_category($id);
+		$this -> load -> view('backend/dishes/list_view', $data);
 	}
 
 	function add() {
-		$this -> form_validation -> set_rules('name', 'Product Name', 'required|trim|xss_clean|max_length[100]');
+		$this -> form_validation -> set_rules('name', 'Dish Name', 'required|trim|xss_clean|max_length[100]');
 		//$this -> form_validation -> set_rules('description', 'Description', 'required|trim|xss_clean|max_length[900]');
-		$this -> form_validation -> set_rules('category', 'Collection', 'required|trim|xss_clean');
+		$this -> form_validation -> set_rules('category', 'Category', 'required|trim|xss_clean');
 
 		if ($this -> form_validation -> run() == FALSE)// validation hasn't been passed
 		{
-			$data['collections'] = $this -> collections_model -> get_all_collection_names();
-			$this -> load -> view('backend/products/add_view', $data);
+			$data['categories'] = $this -> categories_model -> get_all();
+			$this -> load -> view('backend/dishes/add_view', $data);
 		} else// passed validation proceed to post success logic
 		{
 			// build array for the model
@@ -71,36 +71,36 @@ class Products extends CI_Controller {
 			if ($this -> upload -> do_upload()) {
 				$data = $this -> upload -> data();
 				$form_data = array('name' => set_value('name'), 'description' => $this -> input -> post('description'), 'image' => $data['file_name'], 'category' => set_value('category'));
-				if ($this -> products_model -> SaveProduct($form_data) == TRUE)// the information has therefore been successfully saved in the db
+				if ($this -> dishes_model -> save($form_data) == TRUE)// the information has therefore been successfully saved in the db
 				{
 					$this -> ci_alerts -> set('success', 'Saved Successfully');
-					redirect('admin/product/add');
+					redirect('admin/dishes/add');
 					// or whatever logic needs to occur
 				} else {
 					$this -> ci_alerts -> set('success', 'An error occurred saving your information. Please try again later');
-					redirect('admin/product/add');
+					redirect('admin/dishes/add');
 
 				}
 			} else {
 				//Failed to upload file.
 				$data['upload_error'] = $this -> upload -> display_errors();
-				$data['collections'] = $this -> collections_model -> get_all_collection_names();
-				$this -> load -> view('backend/products/add_view', $data);
+				$data['collections'] = $this -> categories_model -> get_all();
+				$this -> load -> view('backend/dishes/add_view', $data);
 			}
 
 		}
 	}
 
 	function edit($id) {
-		$this -> form_validation -> set_rules('name', 'Product Name', 'required|trim|xss_clean|max_length[100]');
+		$this -> form_validation -> set_rules('name', 'Dish Name', 'required|trim|xss_clean|max_length[100]');
 		$this -> form_validation -> set_rules('description', 'Description', 'required|trim|xss_clean|max_length[900]');
-		$this -> form_validation -> set_rules('category', 'Collection', 'required|trim|xss_clean');
+		$this -> form_validation -> set_rules('category', 'Category', 'required|trim|xss_clean');
 
 		if ($this -> form_validation -> run() == FALSE)// validation hasn't been passed
 		{
-			$data['products'] = $this -> products_model -> GetOne($id);
-			$data['collections'] = $this -> collections_model -> get_all_collection_names();
-			$this -> load -> view('backend/products/edit_view', $data);
+			$data['dishes'] = $this -> dishes_model -> get_one($id);
+			$data['categories'] = $this -> categories_model -> get_all();
+			$this -> load -> view('backend/dishes/edit_view', $data);
 		} else// passed validation proceed to post success logic
 		{
 			// build array for the model
@@ -123,35 +123,35 @@ class Products extends CI_Controller {
 				if ($this -> upload -> do_upload()) {
 					$data = $this -> upload -> data();
 					$form_data = array('name' => set_value('name'), 'description' => $this -> input -> post('description'), 'image' => $data['file_name'], 'category' => set_value('category'));
-					if ($this -> products_model -> UpdateProduct($id, $form_data) == TRUE)// the information has therefore been successfully saved in the db
+					if ($this -> dishes_model -> update($id, $form_data) == TRUE)// the information has therefore been successfully saved in the db
 					{
 						$this -> ci_alerts -> set('success', 'Saved Successfully');
-						redirect('admin/product/edit/' . $id);
+						redirect('admin/dishes/edit/' . $id);
 						// or whatever logic needs to occur
 					} else {
 						$this -> ci_alerts -> set('success', 'An error occurred saving your information. Please try again later');
-						redirect('admin/product/edit/' . $id);
+						redirect('admin/dishes/edit/' . $id);
 
 					}
 				} else {
 					//Failed to upload file.
 					$data['upload_error'] = $this -> upload -> display_errors();
-					$data['products'] = $this -> products_model -> GetOne($id);
-					$data['collections'] = $this -> collections_model -> get_all_collection_names();
-					$this -> load -> view('backend/products/edit_view', $data);
+					$data['dishes'] = $this -> dishes_model -> get_one($id);
+			        $data['categories'] = $this -> categories_model -> get_all();
+					$this -> load -> view('backend/dishes/edit_view', $data);
 				}
 			} else {
 
 				$form_data = array('name' => set_value('name'), 'description' => $this -> input -> post('description'), 'category' => set_value('category'));
 
-				if ($this -> products_model -> UpdateProduct($id, $form_data) == TRUE)// the information has therefore been successfully saved in the db
+				if ($this -> dishes_model -> update($id, $form_data) == TRUE)// the information has therefore been successfully saved in the db
 				{
 					$this -> ci_alerts -> set('success', 'Saved Successfully');
-					redirect('admin/product/edit/' . $id);
+					redirect('admin/dishes/edit/' . $id);
 					// or whatever logic needs to occur
 				} else {
 					$this -> ci_alerts -> set('success', 'Nothing to Update');
-					redirect('admin/product/edit/' . $id);
+					redirect('admin/dishes/edit/' . $id);
 
 				}
 
@@ -162,8 +162,8 @@ class Products extends CI_Controller {
 	public function filter() {
 
 		$filter = $this -> input -> post('filter');
-		$data['products'] = $this -> products_model -> GetAllInACollection($filter);
-		$this -> load -> view('backend/products/list_ajax_view', $data);
+		$data['dishes'] = $this -> dishes_model -> get_all_in_this_collection($filter);
+		$this -> load -> view('backend/dishes/list_ajax_view', $data);
 
 	}
 
@@ -199,7 +199,7 @@ class Products extends CI_Controller {
 
 	function sorting() {
 		//I know N+1 Problem is here let me solve it in future.
-		$this -> products_model -> SortOrderUpdate();
+		$this -> dishes_model -> sort_order_update();
 
 	}
 

@@ -23,7 +23,7 @@
 					</div>
 					<div class="span9 well">
 
-						<form class="form-horizontal" id="product_form"  enctype="multipart/form-data" method="post" action="<?php site_url('admin/product/edit'); ?>" >
+						<form class="form-horizontal" id="product_form"  enctype="multipart/form-data" method="post" action="<?php site_url('admin/dishes/edit'); ?>" >
 							<fieldset>
 								<div id="legend" class="">
 									<?php echo validation_errors('<div class="alert alert-error fade in">', '</div>'); ?>
@@ -34,21 +34,21 @@
 										}
   									?>
 									<legend class="">
-										Update Product
+										Update Dish
 									</legend>
 								</div>
 								
-								<?php if(isset($products) && count($products->result())){
+								<?php if(isset($dishes) && count($dishes->result())){
 								
-								foreach ($products->result() as $product){?>
+								foreach ($dishes->result() as $dishes){?>
 								<div class="control-group">
 
 									<!-- Text input-->
-									<label class="control-label" for="input01">Product Name</label>
+									<label class="control-label" for="input01">Dish Name</label>
 									<div class="controls">
-										<input placeholder="Product Name" class="input-large" type="text" id="name" name="name" value="<?php echo $product -> pname; ?>">
+										<input placeholder="Dish Name" class="input-large" type="text" id="name" name="name" value="<?php echo $dishes -> dname; ?>">
 										<p class="help-block">
-											Name of the Product
+											Name of the Dish
 										</p>
 									</div>
 								</div>
@@ -57,7 +57,7 @@
 									<!-- Text input-->
 									<label class="control-label" for="input01">Product Description</label>
 									<div class="controls">
-										<textarea name="description" id="description" ><?php echo $product -> pdescription; ?></textarea>
+										<textarea name="description" id="description" ><?php echo $dishes -> ddescription; ?></textarea>
 										<p class="help-block">
 											Description of Product
 										</p>
@@ -67,13 +67,13 @@
 								<div class="control-group">
 
 									<!-- Select Basic -->
-									<label class="control-label">Collection</label>
+									<label class="control-label">Category</label>
 									<div class="controls">
 										<select class="input-large" name="category" id="category">
 											<option value="">Select</option>
-											<?php if(isset($collections)&&count($collections->result())){?>
-												<?php foreach($collections->result() as $collection){?>
-												<option value="<?php echo $collection -> id; ?>" <?php if($collection -> id == $product -> pcategory){echo "selected='TRUE'";}?> ><?php echo $collection -> name; ?></option>
+											<?php if(isset($categories)&&count($categories->result())){?>
+												<?php foreach($categories->result() as $categories){?>
+												<option value="<?php echo $categories -> id; ?>" <?php if($categories -> id == $dishes -> dcategory){echo "selected='TRUE'";}?> ><?php echo $categories -> name; ?></option>
 												<?php } ?>
 											<?php } ?>
 											
@@ -87,7 +87,7 @@
 									<!-- File Upload -->
 									<div class="controls">
 										<div class="fileupload fileupload-new" data-provides="fileupload">
-											<div class="fileupload-new thumbnail" style="width: 200px; height: 150px;"><img src="<?php echo base_url();?>/uploads/<?php echo $product -> pimage; ?>" />
+											<div class="fileupload-new thumbnail" style="width: 200px; height: 150px;"><img src="<?php echo base_url();?>/uploads/<?php echo $dishes -> dimage; ?>" />
 											</div>
 											<div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 200px; max-height: 150px; line-height: 20px;"></div>
 											<div>
@@ -110,7 +110,7 @@
 									<div class="controls">
 										<button class="btn btn-success" type="submit">
 											Update
-										</button> <a href="<?php echo site_url('admin/products');?>" class="btn btn-primary">
+										</button> <a href="<?php echo site_url('admin/dishes');?>" class="btn btn-primary">
 											Cancel
 										</a>
 									</div>

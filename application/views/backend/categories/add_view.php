@@ -2,7 +2,7 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8">
-		<title>Glene Jean | Dashboard</title>
+		<title>Central Park Deli | Dashboard</title>
 		<?php echo $this -> load -> view('backend/slice/header'); ?>
 		
 	</head>

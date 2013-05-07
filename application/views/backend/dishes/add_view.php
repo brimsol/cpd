@@ -2,7 +2,7 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8">
-		<title>Glene Jean | Dashboard</title>
+		<title>Central Park Deli | Dashboard</title>
 		<?php echo $this -> load -> view('backend/slice/header'); ?>
 		
 	</head>
@@ -32,28 +32,28 @@
 									<?php echo $this -> ci_alerts -> display('success'); ?>
 									<?php if(isset($upload_error)){echo '<div class="alert alert-error fade in">'.$upload_error.'</div>';}  ?>
 									<legend class="">
-										Add Product
+										Add Dish
 									</legend>
 								</div>
 								<div class="control-group">
 
 									<!-- Text input-->
-									<label class="control-label" for="input01">Product Name</label>
+									<label class="control-label" for="input01">Dish Name</label>
 									<div class="controls">
-										<input placeholder="Product Name" class="input-large" id="name" type="text" name="name">
+										<input placeholder="Dish Name" class="input-large" id="name" type="text" name="name">
 										<p class="help-block">
-											Name of the Product
+											Name of the Dish
 										</p>
 									</div>
 								</div>
 								<div class="control-group">
 
 									<!-- Text input-->
-									<label class="control-label" for="input01">Product Description</label>
+									<label class="control-label" for="input01">Dish Description</label>
 									<div class="controls">
 										<textarea name="description" id="description" id="description"></textarea>
 										<p class="help-block">
-											Description of Product
+											Description of Dish
 										</p>
 									</div>
 								</div>
@@ -61,13 +61,13 @@
 								<div class="control-group">
 
 									<!-- Select Basic -->
-									<label class="control-label">Collection</label>
+									<label class="control-label">Category</label>
 									<div class="controls">
 										<select class="input-large" name="category" id="category">
 											<option value="">Select</option>
-											<?php if(isset($collections)&&count($collections->result())){?>
-												<?php foreach($collections->result() as $collection){?>
-												<option value="<?php echo $collection->id;?>"><?php echo $collection->name;?></option>
+											<?php if(isset($categories)&&count($categories->result())){?>
+												<?php foreach($categories->result() as $categories){?>
+												<option value="<?php echo $categories->id;?>"><?php echo $categories->name;?></option>
 												<?php } ?>
 											<?php }?>
 											

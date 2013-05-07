@@ -2,7 +2,7 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8">
-		<title>Central Park Deli | Dashboard</title>
+		<title>Glene Jean | Dashboard</title>
 		<?php echo $this -> load -> view('backend/slice/header'); ?>
 	</head>
 
@@ -23,7 +23,7 @@
 					</div>
 					<div class="span9 well">
 
-						<form class="form-horizontal" id="collection_form"  enctype="multipart/form-data" method="post" action="<?php site_url('admin/categories/edit'); ?>" >
+						<form class="form-horizontal" id="product_form"  enctype="multipart/form-data" method="post" action="<?php site_url('admin/dishes/edit'); ?>" >
 							<fieldset>
 								<div id="legend" class="">
 									<?php echo validation_errors('<div class="alert alert-error fade in">', '</div>'); ?>
@@ -34,39 +34,59 @@
 										}
   									?>
 									<legend class="">
-										Update Collection
+										Update Special Dish
 									</legend>
 								</div>
 								
-								<?php if(isset($categories) && count($categories->result())){
+								<?php if(isset($dishes) && count($dishes->result())){
 								
-								foreach ($categories->result() as $categories){?>
+								foreach ($dishes->result() as $dishes){?>
 								<div class="control-group">
 
 									<!-- Text input-->
-									<label class="control-label" for="input01">Category Name</label>
+									<label class="control-label" for="input01">Dish Name</label>
 									<div class="controls">
-										<input placeholder="Category Name" class="input-large" type="text" name="name" id="name" value="<?php echo $categories->name; ?>">
+										<input placeholder="Dish Name" class="input-large" type="text" id="name" name="name" value="<?php echo $dishes -> name; ?>">
 										<p class="help-block">
-											Name for the Category
+											Name of the Dish
 										</p>
 									</div>
 								</div>
-								
 								<div class="control-group">
 
 									<!-- Text input-->
-									<label class="control-label" for="input01">Category Description</label>
+									<label class="control-label" for="input01">Product Description</label>
 									<div class="controls">
-										<textarea name="description" id="description"><?php echo $categories->description; ?></textarea>
+										<textarea name="description" id="description" ><?php echo $dishes -> description; ?></textarea>
 										<p class="help-block">
-											Description for Category
+											Description of Product
 										</p>
 									</div>
 								</div>
 
-
 								
+								<div class="control-group">
+									<label class="control-label">Image</label>
+
+									<!-- File Upload -->
+									<div class="controls">
+										<div class="fileupload fileupload-new" data-provides="fileupload">
+											<div class="fileupload-new thumbnail" style="width: 200px; height: 150px;"><img src="<?php echo base_url();?>/uploads/<?php echo $dishes -> image; ?>" />
+											</div>
+											<div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 200px; max-height: 150px; line-height: 20px;"></div>
+											<div>
+												<span class="btn btn-file"><span class="fileupload-new">Change image</span><span class="fileupload-exists">Change</span>
+													<input type="file" name="userfile"/>
+												</span>
+												<a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Remove</a>
+											</div>
+										</div>
+										<p class="help-block">
+											<em>Supported formats: jpeg,jpg,png,gif Maximum file size: 500KB</em>
+									</p>
+									</div>
+								</div>
+
 								<div class="control-group">
 									<label class="control-label"></label>
 
@@ -74,7 +94,7 @@
 									<div class="controls">
 										<button class="btn btn-success" type="submit">
 											Update
-										</button> <a href="<?php echo site_url('admin/categories');?>" class="btn btn-primary">
+										</button> <a href="<?php echo site_url('admin/special');?>" class="btn btn-primary">
 											Cancel
 										</a>
 									</div>

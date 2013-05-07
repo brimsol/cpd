@@ -6,7 +6,7 @@
  * @author AMI
  * @link ami@bandyworks.com
  * */
-class Categories_model extends CI_Model {
+class Special_model extends CI_Model {
 
 	function __construct() {
 		parent::__construct();
@@ -23,7 +23,7 @@ class Categories_model extends CI_Model {
 	 */
 
 	function save($form_data) {
-		$this -> db -> insert('categories', $form_data);
+		$this -> db -> insert('special', $form_data);
 		if ($this -> db -> affected_rows() == '1') {
 			return TRUE;
 		}
@@ -34,7 +34,7 @@ class Categories_model extends CI_Model {
 	function update($id, $form_data) {
 
 		$this -> db -> where('id', $id);
-		$this -> db -> update('categories', $form_data);
+		$this -> db -> update('special', $form_data);
 
 		if ($this -> db -> affected_rows() == '1') {
 			return TRUE;
@@ -50,21 +50,21 @@ class Categories_model extends CI_Model {
 			//$this -> db -> query(" UPDATE c_pages SET sort = " . $p . " WHERE pid = " . $id . " ");
 			$form_data = array('sort_order' => $cid . $p);
 			$this -> db -> where('id', $id);
-			$this -> db -> update('categories', $form_data);
+			$this -> db -> update('special', $form_data);
 		}
 
 	}
 
 	function get_all() {
 
-		return $this -> db -> order_by('sort_order', 'ASC') -> get('categories');
+		return $this -> db -> order_by('sort_order', 'ASC') -> get('special');
 
 	}
 
 	
 	function get_one($id) {
 
-		return $this -> db -> where('id', $id) -> limit(1) -> get('categories');
+		return $this -> db -> where('id', $id) -> limit(1) -> get('special');
 
 	}
 

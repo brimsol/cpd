@@ -29,8 +29,8 @@ Class Categories extends CI_Controller {
 	//add new categories,get from view add to db
 
 	function add() {
-		$this -> form_validation -> set_rules('name', 'Collection Name', 'required|trim|xss_clean|max_length[200]');
-		$this -> form_validation -> set_rules('description', 'Description', 'required|trim|xss_clean|max_length[2000]');
+		$this -> form_validation -> set_rules('name', 'Category Name', 'required|trim|xss_clean|max_length[200]');
+		$this -> form_validation -> set_rules('description', 'Description', 'required|trim|xss_clean|max_length[200]');
 
 		if ($this -> form_validation -> run() == FALSE)// validation hasn't been passed
 		{
@@ -52,74 +52,39 @@ Class Categories extends CI_Controller {
 		}
 	}
 
+	//I like to order the food items in this way
+
+	function sorting() {
+		//I know N+1 Problem is here let me solve it in future.
+		$this -> categories_model -> sort_order_update();
+
+	}
+
 	//Edit collection,little tricky no change if there is no new image
 
 	function edit($id) {
-		$this -> form_validation -> set_rules('name', 'Product Name', 'required|trim|xss_clean|max_length[200]');
-		$this -> form_validation -> set_rules('description', 'Description', 'required|trim|xss_clean|max_length[2000]');
-		$this -> form_validation -> set_rules('category', 'Collection', 'required|trim|xss_clean');
+		$this -> form_validation -> set_rules('name', 'Category Name', 'required|trim|xss_clean|max_length[200]');
+		$this -> form_validation -> set_rules('description', 'Description', 'required|trim|xss_clean|max_length[200]');
 
 		if ($this -> form_validation -> run() == FALSE)// validation hasn't been passed
 		{
-			$data['categories'] = $this -> categories_model -> GetOne($id);
-			$data['categories_list'] = $this -> categories_model -> get_all_collection_names();
+			$data['categories'] = $this -> categories_model -> get_one($id);
 			$this -> load -> view('backend/categories/edit_view', $data);
-		} else// passed validation proceed to post success logic
+		} else
 		{
-			// build array for the model
-			if (isset($_FILES['userfile']['name'])) {
 
-				$fileUpload = $_FILES['userfile']['name'];
-
+			$form_data = array('name' => $this -> input -> post('name'), 'description' => $this -> input -> post('description'));
+			if ($this -> categories_model -> update($id, $form_data) == TRUE)// the information has therefore been successfully saved in the db
+			{
+				$this -> ci_alerts -> set('success', 'Saved Successfully');
+				redirect('admin/categories/edit/' . $id);
+				// or whatever logic needs to occur
 			} else {
-
-				$fileUpload = '';
+				$this -> ci_alerts -> set('success', 'Nothing Changed');
+				redirect('admin/categories/edit/' . $id);
 
 			}
-			if (strlen($fileUpload) > 0) {
-				$config['upload_path'] = './uploads/';
-				$config['allowed_types'] = 'gif|jpg|png';
-				$config['max_size'] = '500';
-				$config['encrypt_name'] = TRUE;
-				$this -> load -> library('upload', $config);
 
-				if ($this -> upload -> do_upload()) {
-					$data = $this -> upload -> data();
-					$form_data = array('name' => set_value('name'), 'description' => set_value('description'), 'image' => $data['file_name'], 'category' => set_value('category'), 'new' => $this -> input -> post('new'), 'store' => $this -> input -> post('store'), 'similar' => serialize($this -> input -> post('similar')));
-					if ($this -> categories_model -> UpdateCollection($id, $form_data) == TRUE)// the information has therefore been successfully saved in the db
-					{
-						$this -> ci_alerts -> set('success', 'Saved Successfully');
-						redirect('admin/collection/edit/' . $id);
-						// or whatever logic needs to occur
-					} else {
-						$this -> ci_alerts -> set('success', 'An error occurred saving your information. Please try again later');
-						redirect('admin/collection/edit/' . $id);
-
-					}
-				} else {
-					//Failed to upload file.
-					$data['upload_error'] = $this -> upload -> display_errors();
-					$data['categories'] = $this -> categories_model -> get_all_collection_names();
-					$data['categories'] = $this -> categories_model -> GetOne($id);
-					//$data['categories'] = $this -> categories_model -> get_all_collection_names();
-					$this -> load -> view('backend/categories/edit_view', $data);
-				}
-			} else {
-
-				$form_data = array('name' => set_value('name'), 'description' => set_value('description'), 'category' => set_value('category'), 'new' => $this -> input -> post('new'), 'store' => $this -> input -> post('store'), 'similar' => serialize($this -> input -> post('similar')));
-
-				if ($this -> categories_model -> UpdateCollection($id, $form_data) == TRUE)// the information has therefore been successfully saved in the db
-				{
-					$this -> ci_alerts -> set('success', 'Saved Successfully');
-					redirect('admin/collection/edit/' . $id);
-					// or whatever logic needs to occur
-				} else {
-					$this -> ci_alerts -> set('success', 'Nothing to Update');
-					redirect('admin/collection/edit/' . $id);
-
-				}
-
-			}
 		}
 	}
 
