@@ -7,6 +7,7 @@ $(document).ready(function() {
 	var url_dishes = base_url + "/backend/dishes/sorting";
 	var url_dishes_filter = base_url + "/backend/dishes/filter";
     var url_sorting_dishes = base_url + "/backend/dishes/sorting";
+    var url_sorting_dishes_special = base_url + "/backend/special/sorting";
 	//-------------------------------------Sorting Categories----------------------------
 	$("#sortable_categories tbody.content").sortable({
 		update : function(event, ui) {
@@ -31,7 +32,33 @@ $(document).ready(function() {
 
 		}
 	});
-	$("#sortable tbody.content").disableSelection();
+	$("#sortable_categories tbody.content").disableSelection();
+	
+$("#sortable_special_dishes tbody.content").sortable({
+		update : function(event, ui) {
+			var info = $(this).sortable("toArray");
+			var cid = $('#cid').val();
+			$('#preloader').show();
+			var posting = $.post(url_sorting_dishes_special, {
+				sort : info,
+				cid : cid
+
+			});
+			/* Put the results in a div */
+			posting.done(function(data) {
+
+				$('#preloader').hide();
+
+			});
+			posting.fail(function() {
+				alert("Some error occured,We will try to reload the page,you can try again after that.");
+				location.reload();
+			});
+
+		}
+	});
+	$("#sortable_special_dishes tbody.content").disableSelection();
+	
 
 	//----------------------------------------------------------------
 	$('#backend_dishes_filter').change(function() {

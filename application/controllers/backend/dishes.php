@@ -39,7 +39,7 @@ class Dishes extends CI_Controller {
 
 	public function view($id) {
 
-		$data['dishes'] = $this -> products_model -> GetOne($id);
+		$data['dishes'] = $this -> dishes_model -> get_one($id);
 		$this -> load -> view('backend/dishes/detail_view', $data);
 
 	}

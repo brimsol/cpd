@@ -1,20 +1,16 @@
 
-<?php if(isset($products) && count($products->result())){
-foreach ($products->result() as $product){?>
+<?php if(isset($dishes) && count($dishes->result())){
+foreach ($dishes->result() as $dishes){?>
 <div class="modal-header">
 <a class="close" data-dismiss="modal">&times;</a>
-<h3><?php echo $product -> pname; ?></h3>
+<h3><?php echo $dishes -> name; ?></h3>
 </div>
 <div class="modal-body">
-<p><img src="<?php echo base_url();?>/uploads/<?php echo $product -> pimage; ?>" /></p>
+<p><img src="<?php echo base_url();?>/uploads/<?php echo $dishes -> image; ?>" /></p>
 <table class="table table-bordered">
 <tr>
-<td>Category</td>	
-<td><strong><?php echo $product -> cname; ?></strong></td>
-</tr>
-<tr>
 <td>Description</td>	
-<td><strong><?php echo $product -> pdescription; ?></strong></td>
+<td><strong><?php echo $dishes -> description; ?></strong></td>
 </tr>	
 </table>
 

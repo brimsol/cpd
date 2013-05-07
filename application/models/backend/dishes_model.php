@@ -68,7 +68,7 @@ class Dishes_model extends CI_Model {
 
 	function get_one($id) {
 
-		return $this -> db -> select('d.id AS did,d.name AS dname,d.image AS dimage,d.category AS dcategory,d.description AS ddescription, c.id AS cid,c.name AS cname') -> join('categories c', 'd.category = c.id', 'INNER') -> where('d.id', $id) -> order_by('dname', 'ASC') -> limit(1) -> get('dishes d');
+		return $this -> db -> select('d.id AS did,d.name AS dname,d.image AS dimage,d.category AS dcategory,d.description AS ddescription, c.id AS cid,c.name AS cname') -> join('categories c', 'd.category = c.id', 'INNER') -> where('d.id', $id)-> limit(1) -> get('dishes d');
 
 	}
 

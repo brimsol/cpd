@@ -22,31 +22,28 @@ class Special extends CI_Controller {
 
 	public function index() {
 
+		/*
 		$config = array();
-		$config["base_url"] = site_url('admin/special/');
-		$config["total_rows"] = $this -> db -> count_all('special');
-		$config["per_page"] = 20;
-		$config["uri_segment"] = 3;
-		$config['num_links'] = 9;
-		$this -> pagination -> initialize($config);
-		$page = ($this -> uri -> segment(3)) ? $this -> uri -> segment(3) : 0;
-		$data['dishes'] = $this -> special_model -> get_all($config["per_page"], $page);
-		$data['links'] = $this -> pagination -> create_links();
-		$this -> load -> view('backend/special/list_view', $data);
-	}
-
-	public function view($id) {
-
-		$data['dishes'] = $this -> special_model -> GetOne($id);
-		$this -> load -> view('backend/special/detail_view', $data);
-
+				$config["base_url"] = site_url('admin/special/');
+				$config["total_rows"] = $this -> db -> count_all('special');
+				$config["per_page"] = 20;
+				$config["uri_segment"] = 3;
+				$config['num_links'] = 9;
+				$this -> pagination -> initialize($config);
+				$page = ($this -> uri -> segment(3)) ? $this -> uri -> segment(3) : 0;
+				$data['dishes'] = $this -> special_model -> get_all($config["per_page"], $page);
+				$data['links'] = $this -> pagination -> create_links();
+				$this -> load -> view('backend/special/list_view', $data);
+		 */
+		 $data['dishes'] = $this -> special_model -> get_all();
+		 $this -> load -> view('backend/special/list_view', $data);
+		
 	}
 
 
 	function add() {
 		$this -> form_validation -> set_rules('name', 'Dish Name', 'required|trim|xss_clean|max_length[100]');
 		$this -> form_validation -> set_rules('description', 'Description', 'required|trim|xss_clean|max_length[900]');
-
 
 		if ($this -> form_validation -> run() == FALSE)// validation hasn't been passed
 		{
@@ -147,6 +144,12 @@ class Special extends CI_Controller {
 		}
 	}
 
+	public function view($id) {
+
+		$data['dishes'] = $this -> special_model -> get_one($id);
+		$this -> load -> view('backend/special/detail_view', $data);
+
+	}
 
 	function delete($id = null, $filename = null) {
 
@@ -180,7 +183,7 @@ class Special extends CI_Controller {
 
 	function sorting() {
 		//I know N+1 Problem is here let me solve it in future.
-		$this -> dishes_model -> sort_order_update();
+		$this -> special_model -> sort_order_update();
 
 	}
 

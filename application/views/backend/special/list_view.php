@@ -37,13 +37,13 @@
 							<th >Action</th>
 						</tr>
 						</thead>
-						<tbody>
+						<tbody class="content">
 						
 						<?php foreach ($dishes->result() as $dishes){?>
-						<tr>
+						<tr id="<?php echo $dishes -> id; ?>">
 							<td><?php echo $c; ?></td>
 							<td><?php echo $dishes -> name; ?></td>
-							<td><a href="<?php echo site_url('admin/categories/edit'); ?>/<?php echo $dishes -> id; ?>"><?php echo $dishes -> name; ?></a></td>
+							<td><?php echo $dishes -> description; ?></td>
 							<td>
 						
 							<a rel="tooltip" data-original-title="View" data-toggle="modal" class="btn btn-mini" href="<?php echo site_url('admin/special/view'); ?>/<?php echo $dishes -> id; ?>" ><i class="icon-eye-open"></i></a>

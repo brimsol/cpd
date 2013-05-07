@@ -61,10 +61,6 @@ $route['admin/special/add'] = "backend/special/add";
 $route['admin/special/edit/(:num)'] = "backend/special/edit/$1";
 /*Products Pagination*/
 $route['admin/special/(:num)'] = "backend/special/index/$1";
-/*Store Pagination*/
-$route['admin/stores/(:num)'] = "backend/stores/index/$1";
-/*Swatches Pagination*/
-$route['admin/swatches/(:num)'] = "backend/swatches/index/$1";
 /*View Products @ backend*/
 $route['admin/dishes/view/(:num)'] = "backend/dishes/view/$1";
 /*View Products @ backend*/
@@ -77,34 +73,10 @@ $route['admin/swatche/view/(:num)'] = "backend/swatches/view/$1";
 $route['admin/dishes/edit/(:num)'] = "backend/dishes/edit/$1";
 /*Products In a collection*/
 $route['admin/products/in_collection/(:num)'] = "backend/products/in_collection/$1";
-/*Swatches In a collection*/
-$route['admin/swatches/in_collection/(:num)'] = "backend/swatches/in_collection/$1";
-/*Add New Swatche*/
-$route['admin/swatche/add'] = "backend/swatches/add";
-/*Edit Swatche*/
-$route['admin/swatche/edit/(:num)'] = "backend/swatches/edit/$1";
 /*Add New Collection*/
 $route['admin/categories/add'] = "backend/categories/add";
 /*Edit Collection*/
 $route['admin/categories/edit/(:num)'] = "backend/categories/edit/$1";
-/*Add New Store*/
-$route['admin/store/add'] = "backend/stores/add";
-/*Edit Store*/
-$route['admin/store/edit/(:num)'] = "backend/stores/edit/$1";
-/*List All Stores*/
-$route['admin/stores'] = "backend/stores";
-$route['admin/store'] = "backend/stores";
-/*Add New Online Store*/
-$route['admin/onlinestore/add'] = "backend/onlinestores/add";
-/*Edit Online Store*/
-$route['admin/onlinestore/edit/(:num)'] = "backend/onlinestores/edit/$1";
-/*Delete Online Store*/
-$route['admin/onlinestore/delete/(:num)'] = "backend/onlinestores/delete/$1";
-/*List All Online Stores*/
-$route['admin/onlinestores'] = "backend/onlinestores";
-$route['admin/onlinestore'] = "backend/onlinestores";
-/*Delete Store*/
-$route['admin/store/delete/(:num)'] = "backend/stores/delete/$1";
 /*Add New Page*/
 $route['admin/page/add'] = "backend/pages/add";
 /*Edit Page*/
@@ -118,9 +90,6 @@ $route['admin/categories'] = "backend/categories";
 $route['admin/dishes'] = "backend/dishes";
 /*List All Products*/
 $route['admin/special'] = "backend/special";
-/*List All Swatches*/
-$route['admin/swatches'] = "backend/swatches";
-$route['admin/swatche'] = "backend/swatches";
 /*List All Slider*/
 $route['admin/slider'] = "backend/slider";
 /*Add New Slider*/
@@ -128,11 +97,9 @@ $route['admin/slider/add'] = "backend/slider/add";
 /*Edit Slider*/
 $route['admin/slider/edit/(:num)'] = "backend/slider/edit/$1";
 /*Delete Product*/
-$route['admin/product/delete/(:num)/(:any)'] = "backend/products/delete/$1/$2";
+$route['admin/dishes/delete/(:num)/(:any)'] = "backend/dishes/delete/$1/$2";
 /*Delete Swatches*/
-$route['admin/swatche/delete/(:num)/(:any)'] = "backend/swatches/delete/$1/$2";
-/*Delete Collection*/
-$route['admin/collection/delete/(:num)/(:any)'] = "backend/collections/delete/$1/$2";
+$route['admin/categories/delete/(:num)'] = "backend/categories/delete/$1";
 /*Delete Page*/
 $route['admin/page/delete/(:num)'] = "backend/pages/delete/$1";
 /*Delete Slider*/
