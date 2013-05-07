@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: May 07, 2013 at 02:14 PM
+-- Generation Time: May 07, 2013 at 08:41 PM
 -- Server version: 5.5.25a
 -- PHP Version: 5.4.4
 
@@ -135,14 +135,15 @@ CREATE TABLE IF NOT EXISTS `special` (
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data for table `special`
 --
 
 INSERT INTO `special` (`id`, `name`, `description`, `image`, `sort_order`, `created_at`, `updated_at`) VALUES
-(1, 'asdasddfgdg', 'asdasdadfgdfg', '9a3a473daeb65f8f4c41255d3401ff6c.jpg', 0, '2013-05-07 12:05:57', '0000-00-00 00:00:00');
+(1, 'asdasddfgdg', 'asdasdadfgdfg', '9a3a473daeb65f8f4c41255d3401ff6c.jpg', 0, '2013-05-07 12:05:57', '0000-00-00 00:00:00'),
+(2, 'Dosa', 'sdasdasd', '1f4cc955ee24495a8e829341bc59bd54.PNG', 1, '2013-05-07 16:56:49', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -167,7 +168,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 INSERT INTO `users` (`id`, `user_type`, `username`, `email`, `password`, `last_loggedin`) VALUES
-(1, 'S', 'yuko', 'Demo@gmail.com', '99075eb0baa8cfda1cae029da06b57b93cc13a31', '2013-02-26 16:28:27'),
+(1, 'S', '01sys', 'Demo@gmail.com', '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', '2013-02-26 16:28:27'),
 (2, 'S', 'bandyworks', 'ami@bandyworks.com', '7e9ab5c5b7475f9ef8a9923f42e0fb2d921c006a', '2013-03-13 09:52:48');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
