@@ -171,27 +171,27 @@ class Dishes extends CI_Controller {
 
 		if ($id == '' || $id == null) {
 
-			redirect('admin/products/');
+			redirect('admin/dishes/');
 
 		} elseif ($filename != null) {
-			$this -> db -> delete('products', array('id' => $id));
+			$this -> db -> delete('dishes', array('id' => $id));
 			$full_path = './uploads/' . $filename;
 			//echo $full_path;
 			if (file_exists($full_path)) {
 				if (unlink($full_path)) {
 
-					$this -> ci_alerts -> set('success', 'Product deleted successfully');
-					redirect('admin/products/');
+					$this -> ci_alerts -> set('success', 'Dishes deleted successfully');
+					redirect('admin/dishes/');
 
 				} else {
 
-					$this -> ci_alerts -> set('success', 'Product delected from database,but image files are not removed');
-					redirect('admin/products/');
+					$this -> ci_alerts -> set('success', 'Dishes delected from database,but image files are not removed');
+					redirect('admin/dishes/');
 				}
 			} else {
 
-				$this -> ci_alerts -> set('success', 'Product deleted successfully,files already deleted');
-				redirect('admin/products/');
+				$this -> ci_alerts -> set('success', 'Dishes deleted successfully,files already deleted');
+				redirect('admin/dishes/');
 			}
 		}
 

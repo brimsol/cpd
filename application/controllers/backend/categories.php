@@ -106,25 +106,22 @@ Class Categories extends CI_Controller {
 
 		} elseif ($filename != null) {
 			$this -> db -> delete('categories', array('id' => $id));
-			$tables = array('products', 'swatches');
-			$this -> db -> where('category', $id);
-			$this -> db -> delete($tables);
 			$full_path = './uploads/' . $filename;
 			//echo $full_path;
 			if (file_exists($full_path)) {
 				if (unlink($full_path)) {
 
-					$this -> ci_alerts -> set('success', 'Collection deleted successfully');
+					$this -> ci_alerts -> set('success', 'Category deleted successfully');
 					redirect('admin/categories/');
 
 				} else {
 
-					$this -> ci_alerts -> set('success', 'Collection delected from database,but image files are not removed');
+					$this -> ci_alerts -> set('success', 'Category delected from database,but image files are not removed');
 					redirect('admin/categories/');
 				}
 			} else {
 
-				$this -> ci_alerts -> set('success', 'Collection deleted successfully');
+				$this -> ci_alerts -> set('success', 'Category deleted successfully');
 				redirect('admin/categories/');
 			}
 		}

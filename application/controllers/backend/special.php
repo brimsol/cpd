@@ -158,24 +158,24 @@ class Special extends CI_Controller {
 			redirect('admin/products/');
 
 		} elseif ($filename != null) {
-			$this -> db -> delete('products', array('id' => $id));
+			$this -> db -> delete('special', array('id' => $id));
 			$full_path = './uploads/' . $filename;
 			//echo $full_path;
 			if (file_exists($full_path)) {
 				if (unlink($full_path)) {
 
 					$this -> ci_alerts -> set('success', 'Product deleted successfully');
-					redirect('admin/products/');
+					redirect('admin/special/');
 
 				} else {
 
 					$this -> ci_alerts -> set('success', 'Product delected from database,but image files are not removed');
-					redirect('admin/products/');
+					redirect('admin/special/');
 				}
 			} else {
 
 				$this -> ci_alerts -> set('success', 'Product deleted successfully,files already deleted');
-				redirect('admin/products/');
+				redirect('admin/special/');
 			}
 		}
 
